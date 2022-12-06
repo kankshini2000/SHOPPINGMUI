@@ -1,67 +1,50 @@
 import * as React from 'react';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled, alpha } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
+import InputBase from '@mui/material/InputBase';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
-import MuiAppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import Decorlogo from '../images/decorlogo.PNG'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import Cart from '../images/cart.jpg'
+import User from '../images/user.jpg'
+import '../css/header.css'
 
-const drawerWidth = 100
-const drawerHeight=50;
-
-const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
-  ({ theme, open }) => ({
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: `-${drawerWidth}px`,
-    marginBottom: `-${drawerHeight}px`,
-    ...(open && {
-      transition: theme.transitions.create('margin', {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-    }),
-  }),
-);
-
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme, open }) => ({
-  transition: theme.transitions.create(['margin', 'width'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
-
+const drawerWidth = 100;
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
-
+  padding: theme.spacing(0, 1),
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
 }));
+
+const Search = styled('div')(({ theme }) => ({
+  position: 'relative',
+  borderRadius:'20px',
+  marginRight: theme.spacing(2),
+  marginLeft: '20px',
+  width: '50%',
+  border:'1px solid black' ,
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(2, 4, 3, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    width: '90%',
+  },
+}));
+
 
 export default function PersistentDrawerLeft() {
   const theme = useTheme();
@@ -76,22 +59,30 @@ export default function PersistentDrawerLeft() {
   };
 
   return (
-    <div>
+    <Box sx={{ display: 'flex' }}>
+      <CssBaseline />
+        <Toolbar>
           <IconButton
-            color="inherit"
+          style={{'backgroundColor':'blue','borderRadius':'1px','height':'55px' ,'width':'60px'}}
+            color="blue"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
             sx={{ mr: 2, ...(open && { display: 'none' }) }}
           >
-          < ArrowForwardIcon />
+            
+           <ArrowForwardIcon />
           </IconButton>
+        </Toolbar>    
       <Drawer
         sx={{
           width: drawerWidth,
           flexShrink: 0,
           '& .MuiDrawer-paper': {
             width: drawerWidth,
+            height:'20%',
+            border:'1px solid black' ,
+            top:'70px',
             boxSizing: 'border-box',
           },
         }}
@@ -101,22 +92,26 @@ export default function PersistentDrawerLeft() {
       >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            {theme.direction === 'ltr' ? <CloseIcon  /> : <ChevronRightIcon />}
           </IconButton>
         </DrawerHeader>
-        <Divider />
-        <List>
-          {['side3'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
+        <Typography variant='h6' component='div'>
+            Side3
+          </Typography>
       </Drawer>
-    </div>
-      
+      <img style={{'height':'50px','marginLeft':'-120px','marginTop':'6px' }}
+    src={Decorlogo}  alt="img"/>
+          <Search>
+            <StyledInputBase
+              placeholder="What are you looking for?"
+            />
+          </Search>
+          <img src={User}  alt="img"  style={{'height':'50px','marginLeft':'1px','marginTop':'6px' }}/>
+          <Typography marginTop={'20px'}
+          marginLeft={'10px'}
+          variant='body1' >Hey!Log in or Sign Up
+          </Typography>
+          <img src={Cart}  alt="img"  style={{'height':'50px','marginLeft':'20px','marginTop':'6px' }}/>
+    </Box>
   );
 }
