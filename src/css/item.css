@@ -1,0 +1,24 @@
+
+  .card {
+    border: 1px solid #fff;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    color:black;
+    cursor: pointer;
+  }
+  
+  .card-top h1 {
+  }
+  
+  .card-top > img {
+    width: 100%;
+    background: white;
+  }
+  
+  .card-bottom {
+    font-size: 14px;
+    background-color: cadetblue;
+    color: white;
+  }
+  
