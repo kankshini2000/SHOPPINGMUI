@@ -1,12 +1,12 @@
 import React from 'react'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import {data} from './data'
+import Typography from '@mui/material/Typography';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { data1 } from './data1';
-
+import '../css/item.css'
 
 const PreviousBtn = (props) => {
     console.log(props);
@@ -25,34 +25,38 @@ const PreviousBtn = (props) => {
       </div>
     );
   };
+
+  const sliderSettings = {
+    dots: true,
+    dotsClass: "slick-dots slick-bar",
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    infinite: false,
+  }
   
 
 const Product = () => {
     return (
         <div style={{ margin: "60px" }} className="carousel">
-          <h2>Top furniture Categories</h2>
-          <Slider
+          <Typography variant="h4" >Top furniture Categories</Typography>
+          <Slider {...sliderSettings}
             prevArrow={<PreviousBtn />}
             nextArrow={<NextBtn />}
-            slidesToShow={4}
           >
             {data1.map((item) => (
             <div className="card">
               <div className="card-top">
-                <h3>{item.title}</h3>
+                <Typography variant="h6">{item.title}</Typography>
                 <img style={{'width':'90%','height':'250px','marginBottom': '10px'}}
                   src={
                     item.linkImg
                   }
                 />
-                <h1 style={{
-                    fontSize: '14px'
-                }}>{item.stock}</h1>
+                <Typography variant="body1">{item.stock}</Typography>
               </div>
               <div className="card-bottom">
-                <h3 style={{
-                    fontSize: '16px',
-                }}>{item.category}</h3>
+                <Typography variant="subtitle1" bgcolor={'#dfc087'}
+                >{item.category}</Typography>
               </div>
             </div>
           ))}
